@@ -1,0 +1,50 @@
+-- Найти сотрудников, чья зарплата превышает 10000, и вывести их имя, 
+-- фамилию и название департамента.
+
+select t1.last_name,t1.first_name,t2.department_name
+from employees t1
+join departments t2
+on t1.department_id = t2.department_id 
+where t1.salary > 10000;
+
+-- Найти сотрудников, департаменты которых относятся к региону 'Americas', и
+ -- вывести их имя и фамилию.
+ 
+ select t1.last_name,t1.first_name
+ from employees t1
+ join departments t2
+ on t1.department_id = t2.department_id
+ join regions t3
+ on t2.region_id = t3.region_id
+ where t3.region_name = 'Americas';
+
+-- Найти департаменты, в которых есть сотрудники с зарплатой менее 15000.
+
+select t2.department_name
+from employees t1
+join departments t2
+on t1.department_id = t2.department_id 
+where t1.salary < 15000;
+
+
+-- Найти департаменты, которые находятся в городе 'Seattle', 
+-- отсортировать их по названию и вывести первые три.
+
+select t1.department_name
+from departments t1
+join locations t2
+on t1.location_id = t2.location_id
+where t2.city = 'Seattle'
+order by t1.department_name
+limit 3;
+
+-- Найти сотрудника с максимальной зарплатой из департамента 'Finance' 
+-- и вывести его данные(имя и фамилию).
+
+select t1.last_name,t1.first_name
+from employees t1
+join departments t2
+on t1.department_id = t2.department_id
+where t2.department_name = 'Finance'
+order by t1.salary desc
+limit 1;
